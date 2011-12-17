@@ -1,0 +1,21 @@
+{
+    "name": "sc4node"
+  , "version": "0.0.1"
+  , "author": "Kenichi Kanai"
+  , "private": false
+  , "dependencies": {
+        "socket.io": ">= 0.8.7"
+  }
+  , "licenses": {
+        "type": "GPLv3"
+      , "url": "http://github.com/kn1kn1/sc4node/blob/master/COPYING"
+  }
+  , "repository": {
+        "type": "git"
+      , "url": "http://github.com/kn1kn1/sc4node.git"
+  }
+  , "engines": {
+      "node":  ">=0.6.5"
+  }
+  , "main": "./index"
+}
