@@ -1,6 +1,6 @@
 {
     "name": "sc4node"
-  , "version": "0.0.3"
+  , "version": "0.0.4"
   , "author": "Kenichi Kanai"
   , "private": false
   , "dependencies": {
