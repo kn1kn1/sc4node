@@ -8,12 +8,11 @@ SuperCollider programming language (sclang).
 ```
 
 ## How to use
-
 ```js
 var sc = require('sc4node');
 
 // invoke 'sclang' and attach stdout handler. 
-var sclang = new Sclang('/Applications/SuperCollider/', function (data) {
+var sclang = new sc.Sclang('/Applications/SuperCollider/', function (data) {
   console.log('sclang stdout: ' + data);
 });
 ```
