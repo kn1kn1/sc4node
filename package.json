@@ -1,6 +1,6 @@
 {
     "name": "sc4node"
-  , "version": "0.0.5"
+  , "version": "0.0.6"
   , "author": "Kenichi Kanai"
   , "description": "A library for sclang (SuperCollider client application)"
   , "private": false
