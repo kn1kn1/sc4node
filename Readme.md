@@ -3,6 +3,7 @@ sc4node is a library for node.js which enables to execute and comunicate with
 SuperCollider programming language (sclang).
 
 ## How to Install
+
     npm install sc4node
 
 ## How to use

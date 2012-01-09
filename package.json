@@ -1,16 +1,16 @@
 {
     "name": "sc4node"
-  , "version": "0.0.7"
+  , "version": "0.0.8"
   , "author": "Kenichi Kanai"
   , "description": "A library for sclang (SuperCollider client application)"
   , "private": false
   , "dependencies": {
         "socket.io": ">= 0.8.7"
   }
-  , "licenses": {
-        "type": "GPL"
+  , "licenses": [{
+        "type": "GPLv3"
       , "url": "http://github.com/kn1kn1/sc4node/blob/master/COPYING"
-  }
+  }]
   , "repository": {
         "type": "git"
       , "url": "http://github.com/kn1kn1/sc4node.git"
