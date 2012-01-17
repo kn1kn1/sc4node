@@ -1,86 +1,86 @@
-// socket.io specific code
-var socket = io.connect();
-socket.on('connect', onOpenWebSocket);
-socket.on('stdout', function(message) {
-  appendOutput(message);
-});
-socket.on('disconnect', onCloseWebSocket);
+(function () {
+  "use strict";
+  var socket = io.connect();
+  socket.on('connect', onOpenWebSocket);
+  socket.on('stdout', function (message) {
+    appendOutput(message);
+  });
+  socket.on('disconnect', onCloseWebSocket);
 
-function onOpenWebSocket() {
-  var code = 
-'(\n' + 
-'// analog bubbles\n' + 
-'{\n' + 
-'	f = LFSaw.kr(0.4, 0, 24, LFSaw.kr([8,7.23], 0, 3, 80)).midicps; // glissando function\n' +
-'	CombN.ar(SinOsc.ar(f, 0, 0.04), 0.2, 0.2, 4) // echoing sine wave\n' + 
-'}.play)\n';
-  setTextContent($('#code').get(0), code);
-  $('#start_server').get(0).addEventListener('click', onStartServerClick, false);
-  $('#stop_server').get(0).addEventListener('click', onStopServerClick, false);
-  $('#evaluate').get(0).addEventListener('click', onEvaluateClick, false);
-  $('#stop_sound').get(0).addEventListener('click', onStopSoundClick, false);
-  $('#toggle_recording').get(0).addEventListener('click', onToggleRecording, false);
-  $('#restart_interpreter').get(0).addEventListener('click', onRestartInterpreter, false);
-  $('#clear_output').get(0).addEventListener('click', onClearOutputClick, false);
-  appendOutput('WebSocket connected' + '\n');
-}
+  var code;
+  var stdout;
+  $(document).ready(function () {
+    code = $('#code');
+    stdout = $('#stdout');
+    var INITIAL_CODE =
+      '(\n' +
+      '// analog bubbles\n' +
+      '{\n' +
+      '	f = LFSaw.kr(0.4, 0, 24, LFSaw.kr([8,7.23], 0, 3, 80)).midicps; // glissando function\n' +
+      '	CombN.ar(SinOsc.ar(f, 0, 0.04), 0.2, 0.2, 4) // echoing sine wave\n' +
+      '}.play)\n';
+    code.text(INITIAL_CODE);
+  });
 
-function onCloseWebSocket() {
-  $('#start_server').get(0).removeEventListener('click', onStartServerClick, false);
-  $('#stop_server').get(0).removeEventListener('click', onStopServerClick, false);
-  $('#evaluate').get(0).removeEventListener('click', onEvaluateClick, false);
-  $('#stop_sound').get(0).removeEventListener('click', onStopSoundClick, false);
-  $('#toggle_recording').get(0).removeEventListener('click', onToggleRecording, false);
-  $('#restart_interpreter').get(0).removeEventListener('click', onRestartInterpreter, false);
-  appendOutput('WebSocket disconnected');
-}
-
-function onStartServerClick() {
-  socket.emit('start_server');
-}
-
-function onStopServerClick() {
-  socket.emit('stop_server');
-}
-
-function onEvaluateClick() {
-  var code = $('#code').get(0).value;
-  if (code == '') {
-   return;
+  function onOpenWebSocket() {
+    $('#start_server').bind('click', onStartServerClick);
+    $('#stop_server').bind('click', onStopServerClick);
+    $('#evaluate').bind('click', onEvaluateClick);
+    $('#stop_sound').bind('click', onStopSoundClick);
+    $('#toggle_recording').bind('click', onToggleRecording);
+    $('#restart_interpreter').bind('click', onRestartInterpreter);
+    $('#clear_output').bind('click', onClearOutputClick);
+    appendOutput('WebSocket connected' + '\n');
   }
-  socket.emit('evaluate', code);
-}
 
-function onStopSoundClick() {
-  socket.emit('stop_sound');
-}
-
-function onToggleRecording() {
-  socket.emit('toggle_recording');
-}
-
-function onRestartInterpreter() {
-  socket.emit('restart_interpreter');
-}
-
-function onClearOutputClick() {
-  setOutput('');
-}
-
-function appendOutput(msg) {
-  setOutput($('#stdout').get(0).value + msg);
-}
-
-function setOutput(msg) {
-  var stdout = $('#stdout').get(0);
-  setTextContent(stdout, msg);
-  stdout.scrollTop = stdout.scrollHeight;
-}
-
-function setTextContent(element, text) {
-  while (element.firstChild !== null) {
-    element.removeChild(element.firstChild); // remove all existing content
+  function onCloseWebSocket() {
+    $('#start_server').unbind('click', onStartServerClick);
+    $('#stop_server').unbind('click', onStopServerClick);
+    $('#evaluate').unbind('click', onEvaluateClick);
+    $('#stop_sound').unbind('click', onStopSoundClick);
+    $('#toggle_recording').unbind('click', onToggleRecording);
+    $('#restart_interpreter').unbind('click', onRestartInterpreter);
+    appendOutput('WebSocket disconnected');
   }
-  element.appendChild(document.createTextNode(text));
-}
 
+  function onStartServerClick() {
+    socket.emit('start_server');
+  }
+
+  function onStopServerClick() {
+    socket.emit('stop_server');
+  }
+
+  function onEvaluateClick() {
+    var text = code.val();
+    if (!text) {
+      return;
+    }
+    socket.emit('evaluate', text);
+  }
+
+  function onStopSoundClick() {
+    socket.emit('stop_sound');
+  }
+
+  function onToggleRecording() {
+    socket.emit('toggle_recording');
+  }
+
+  function onRestartInterpreter() {
+    socket.emit('restart_interpreter');
+  }
+
+  function onClearOutputClick() {
+    setOutput('');
+  }
+
+  function appendOutput(msg) {
+    setOutput(stdout.val() + msg);
+  }
+
+  function setOutput(msg) {
+    stdout.text(msg);
+    stdout.attr('scrollTop', stdout.attr('scrollHeight'));
+  }
+}());
