@@ -1,4 +1,4 @@
-(function () {
+$(function () {
   "use strict";
   var socket = io.connect();
   socket.on('connect', onOpenWebSocket);
@@ -7,20 +7,16 @@
   });
   socket.on('disconnect', onCloseWebSocket);
 
-  var code;
-  var stdout;
-  $(document).ready(function () {
-    code = $('#code');
-    stdout = $('#stdout');
-    var INITIAL_CODE =
-      '(\n' +
-      '// analog bubbles\n' +
-      '{\n' +
-      '	f = LFSaw.kr(0.4, 0, 24, LFSaw.kr([8,7.23], 0, 3, 80)).midicps; // glissando function\n' +
-      '	CombN.ar(SinOsc.ar(f, 0, 0.04), 0.2, 0.2, 4) // echoing sine wave\n' +
-      '}.play)\n';
-    code.text(INITIAL_CODE);
-  });
+  var code = $('#code');
+  var stdout = $('#stdout');
+  var INITIAL_CODE =
+    '(\n' +
+    '// analog bubbles\n' +
+    '{\n' +
+    '	f = LFSaw.kr(0.4, 0, 24, LFSaw.kr([8,7.23], 0, 3, 80)).midicps; // glissando function\n' +
+    '	CombN.ar(SinOsc.ar(f, 0, 0.04), 0.2, 0.2, 4) // echoing sine wave\n' +
+    '}.play)\n';
+  code.text(INITIAL_CODE);
 
   function onOpenWebSocket() {
     $('#start_server').bind('click', onStartServerClick);
@@ -83,4 +79,4 @@
     stdout.text(msg);
     stdout.attr('scrollTop', stdout.attr('scrollHeight'));
   }
-}());
+});
