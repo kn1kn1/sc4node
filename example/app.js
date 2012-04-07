@@ -41,7 +41,7 @@ var io = sio.listen(app);
 io.sockets.on('connection', function(socket) {
   console.log('connection');
     
-  var sclang = new Sclang('/Applications/SuperCollider/', function (data) {
+  var sclang = new Sclang('/Applications/SuperCollider/SuperCollider.app/Contents/Resources/', function (data) {
     console.log('sclang stdout: ' + data);
     socket.emit('stdout', '' + data);
   });
