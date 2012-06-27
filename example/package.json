@@ -1,0 +1,23 @@
+{
+    "name": "sc4node-example"
+  , "author": "Kenichi Kanai"
+  , "private": true
+  , "licenses": [{
+        "type": "GPLv3"
+      , "url": "http://github.com/kn1kn1/sc4node/blob/master/COPYING"
+  }]
+  , "repository": {
+        "type": "git"
+      , "url": "http://github.com/kn1kn1/sc4node.git"
+  }
+  , "engines": {
+      "node":  ">=0.6.5"
+  }
+  , "dependencies": {
+      "express": "2.5.x"
+    , "jade": ">= 0.0.1"
+    , "socket.io": ">=0.8.7"
+    , "sc4node": ">=0.0.7"
+  }
+  , "main": "./index"
+}

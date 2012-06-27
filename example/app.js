@@ -34,7 +34,7 @@ app.configure('production', function(){
 app.get('/', routes.index);
 
 app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+console.log("Express server in %s mode", app.settings.env);
 
 // Socket IO
 var io = sio.listen(app);
