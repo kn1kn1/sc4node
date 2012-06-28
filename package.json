@@ -5,7 +5,7 @@
   , "description": "A library for sclang (SuperCollider client application)"
   , "private": false
   , "dependencies": {
-        "socket.io": ">= 0.8.7"
+        "socket.io": ">=0.8.7"
   }
   , "licenses": [{
         "type": "GPLv3"
