@@ -4,9 +4,6 @@
   , "author": "Kenichi Kanai"
   , "description": "A library for sclang (SuperCollider client application)"
   , "private": false
-  , "dependencies": {
-        "socket.io": ">=0.8.7"
-  }
   , "licenses": [{
         "type": "GPLv3"
       , "url": "http://github.com/kn1kn1/sc4node/blob/master/COPYING"
