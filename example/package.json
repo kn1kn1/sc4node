@@ -1,5 +1,6 @@
 {
     "name": "sc4node-example"
+  , "version": "0.0.13"
   , "author": "Kenichi Kanai"
   , "private": true
   , "licenses": [{

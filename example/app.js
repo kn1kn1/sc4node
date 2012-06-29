@@ -6,7 +6,7 @@
 var express = require('express')
   , sio = require('socket.io')
   , routes = require('./routes')
-  , Sclang = require('../lib/sc4node/sclang')
+  , sc = require('../lib/sc4node')
 
 var app = module.exports = express.createServer();
 
@@ -41,7 +41,7 @@ var io = sio.listen(app);
 io.sockets.on('connection', function(socket) {
   console.log('connection');
     
-  var sclang = new Sclang('/Applications/SuperCollider/SuperCollider.app/Contents/Resources/', function(data) {
+  var sclang = sc.start('/Applications/SuperCollider/SuperCollider.app/Contents/Resources/', function(data) {
     console.log('sclang stdout: ' + data);
     socket.emit('stdout', '' + data);
   });

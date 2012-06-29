@@ -11,7 +11,7 @@ SuperCollider programming language (sclang).
 var sc = require('sc4node');
 
 // invoke 'sclang' and attach stdout handler. 
-var sclang = new sc.Sclang('/Applications/SuperCollider/SuperCollider.app/Contents/Resources/', function (data) {
+var sclang = sc.start('/Applications/SuperCollider/SuperCollider.app/Contents/Resources/', function (data) {
   console.log('sclang stdout: ' + data);
 });
 ```
