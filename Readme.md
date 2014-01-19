@@ -1,5 +1,6 @@
 # sc4node
 [![Build Status](https://travis-ci.org/kn1kn1/sc4node.png?branch=master)](https://travis-ci.org/kn1kn1/sc4node)
+[![Code Climate](https://codeclimate.com/github/kn1kn1/sc4node.png)](https://codeclimate.com/github/kn1kn1/sc4node)
 
 sc4node is a library for node.js which enables to execute and comunicate with 
 SuperCollider programming language (sclang).
