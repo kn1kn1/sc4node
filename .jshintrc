@@ -1,0 +1,9 @@
+{
+  "node" : true,
+  "indent" : 2,
+  "maxlen" : 120,
+  "eqeqeq":true,
+  "devel" : true,
+  "unused" : "vars",
+  "undef" : true
+}

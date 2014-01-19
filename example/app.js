@@ -3,10 +3,10 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , sio = require('socket.io')
-  , routes = require('./routes')
-  , sc = require('../lib/sc4node')
+var express = require('express'),
+  sio = require('socket.io'),
+  routes = require('./routes'),
+  sc = require('../lib/sc4node');
 
 var app = module.exports = express.createServer();
 
