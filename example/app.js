@@ -1,43 +1,44 @@
 
+
+
 /**
  * Module dependencies.
  */
 
-var express = require('express'),
-  sio = require('socket.io'),
-  routes = require('./routes'),
-  sc = require('../lib/sc4node');
+var express = require('express');
+var routes = require('./routes');
+var http = require('http');
+var path = require('path');
+var sio = require('socket.io');
+var sc = require('../lib/sc4node');
 
-var app = module.exports = express.createServer();
+var app = express();
 
-// Configuration
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+app.use(express.favicon());
+app.use(express.logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded());
+app.use(express.methodOverride());
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.configure(function(){
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
-});
-
-app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
-});
-
-app.configure('production', function(){
-  app.use(express.errorHandler()); 
-});
-
-// Routes
+// development only
+if ('development' === app.get('env')) {
+  app.use(express.errorHandler());
+}
 
 app.get('/', routes.index);
 
-app.listen(3000);
-console.log("Express server in %s mode", app.settings.env);
+var server = http.createServer(app).listen(app.get('port'), function(){
+  console.log("Express server listening on port " + app.get('port'));
+});
 
 // Socket IO
-var io = sio.listen(app);
+var io = sio.listen(server);
 io.sockets.on('connection', function(socket) {
   console.log('connection');
     
